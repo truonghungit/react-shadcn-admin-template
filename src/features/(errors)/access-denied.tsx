@@ -12,7 +12,7 @@ function RouteComponent() {
   };
 
   return (
-    <div className='min-h-screen bg-slate-50 flex items-center justify-center p-4'>
+    <div className='h-svh flex items-center justify-center p-4'>
       <div className='w-full max-w-md'>
         <div className='text-center space-y-6'>
           <div className='mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center'>
@@ -20,10 +20,8 @@ function RouteComponent() {
           </div>
 
           <div className='space-y-2'>
-            <h2 className='text-2xl font-semibold text-slate-800'>
-              Access Denied
-            </h2>
-            <p className='text-slate-600 leading-relaxed'>
+            <h2 className='text-4xl font-semibold '>Access Denied</h2>
+            <p className='text-muted-foreground leading-relaxed'>
               You don't have permission to access this resource. Contact your
               administrator if you believe this is an error.
             </p>
