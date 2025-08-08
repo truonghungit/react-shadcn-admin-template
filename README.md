@@ -1,69 +1,59 @@
-# React + TypeScript + Vite
+# React Shadcn UI Admin Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Getting started
+#### Clone the project
 
-Currently, two official plugins are available:
+Clone the latest version
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+git clone https://github.com/truonghungit/react-shadcn-admin-template.git
+cd react-shadcn-admin-template
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Or you can specify the new directory name by syntax adding new directory name at the end of the clone command
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+git clone https://github.com/truonghungit/react-shadcn-admin-template.git new_directory_name
+cd new_directory_name
 ```
+
+[Previous versions](https://github.com/truonghungit/react-shadcn-admin-template/releases) are also available for download.
+
+#### Install dependencies.
+
+```bash
+ pnpm install
+```
+
+#### Start the server
+
+Start your application in local development server with hot reload
+
+```bash
+pnpm run dev
+```
+## Tech Stack
+- React 19
+- TypeScript
+- Vite
+- ESLint, Prettier
+- TanStack Router
+- Shadcn UI
+- Tabler Icons
+
+## Make it your own
+
+When using this project to build your application, you may want to consider the following steps:
+- Rename the project in `package.json` `name` property and set an appropriate version (eg `0.0.1` or `1.0.0`)
+- Delete the existing `CHANGELOG.md` (you will generate your own with future releases of your features)
+- Update the `README.md` content to reflect your project's context
+- Replace favicon, edit the title and relevant SEO meta tags in `index.html`
+- Update or remove the `LICENSE` file as needed
+- Remove any demo components, test pages, or placeholder data you don’t need
+
+## Author
+Made with ♥ by Hung Pham
+
+## License
+This source code is licensed under the MIT license found in the
+[LICENSE](https://github.com/truonghungit/react-shadcn-admin-template/blob/master/LICENSE) file.
