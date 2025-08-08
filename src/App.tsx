@@ -1,9 +1,12 @@
-import AppLayout from '@/layouts/layout';
+import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { routeTree } from './routes/root';
+
+const router = createRouter({ routeTree });
 
 function App() {
   return (
     <>
-      <AppLayout type='classic'>Content goes here</AppLayout>
+      <RouterProvider router={router} />
     </>
   );
 }
