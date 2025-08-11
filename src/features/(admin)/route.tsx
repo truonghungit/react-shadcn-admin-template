@@ -1,14 +1,14 @@
-import EmptyLayout from '@/layouts/empty/empty-layout';
+import ClassicLayout from '@/layouts/classic/classic-layout';
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/(authentication)')({
+export const Route = createFileRoute('/(admin)')({
   component: RouteComponent,
 });
 
 function RouteComponent() {
   return (
-    <EmptyLayout>
+    <ClassicLayout>
       <Outlet />
-    </EmptyLayout>
+    </ClassicLayout>
   );
 }

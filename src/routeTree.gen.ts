@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './features/__root'
 import { Route as authenticationRouteRouteImport } from './features/(authentication)/route'
+import { Route as adminRouteRouteImport } from './features/(admin)/route'
+import { Route as adminIndexRouteImport } from './features/(admin)/index'
 import { Route as errorsNotFoundRouteImport } from './features/(errors)/not-found'
 import { Route as errorsMaintenanceRouteImport } from './features/(errors)/maintenance'
 import { Route as errorsAccessDeniedRouteImport } from './features/(errors)/access-denied'
@@ -18,6 +20,7 @@ import { Route as authenticationSignInIndexRouteImport } from './features/(authe
 import { Route as authenticationResetPasswordIndexRouteImport } from './features/(authentication)/reset-password/index'
 import { Route as authenticationForgotPasswordIndexRouteImport } from './features/(authentication)/forgot-password/index'
 import { Route as adminUsersIndexRouteImport } from './features/(admin)/users/index'
+import { Route as adminDashboardIndexRouteImport } from './features/(admin)/dashboard/index'
 import { Route as adminContactsIndexRouteImport } from './features/(admin)/contacts/index'
 import { Route as adminUsersCreateRouteImport } from './features/(admin)/users/create'
 import { Route as adminContactsCreateRouteImport } from './features/(admin)/contacts/create'
@@ -28,6 +31,15 @@ import { Route as adminUsersUserIdEditRouteImport } from './features/(admin)/use
 const authenticationRouteRoute = authenticationRouteRouteImport.update({
   id: '/(authentication)',
   getParentRoute: () => rootRouteImport,
+} as any)
+const adminRouteRoute = adminRouteRouteImport.update({
+  id: '/(admin)',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const adminIndexRoute = adminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => adminRouteRoute,
 } as any)
 const errorsNotFoundRoute = errorsNotFoundRouteImport.update({
   id: '/(errors)/not-found',
@@ -69,29 +81,34 @@ const authenticationForgotPasswordIndexRoute =
     getParentRoute: () => authenticationRouteRoute,
   } as any)
 const adminUsersIndexRoute = adminUsersIndexRouteImport.update({
-  id: '/(admin)/users/',
+  id: '/users/',
   path: '/users/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => adminRouteRoute,
+} as any)
+const adminDashboardIndexRoute = adminDashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => adminRouteRoute,
 } as any)
 const adminContactsIndexRoute = adminContactsIndexRouteImport.update({
-  id: '/(admin)/contacts/',
+  id: '/contacts/',
   path: '/contacts/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => adminRouteRoute,
 } as any)
 const adminUsersCreateRoute = adminUsersCreateRouteImport.update({
-  id: '/(admin)/users/create',
+  id: '/users/create',
   path: '/users/create',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => adminRouteRoute,
 } as any)
 const adminContactsCreateRoute = adminContactsCreateRouteImport.update({
-  id: '/(admin)/contacts/create',
+  id: '/contacts/create',
   path: '/contacts/create',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => adminRouteRoute,
 } as any)
 const adminUsersUserIdRouteRoute = adminUsersUserIdRouteRouteImport.update({
-  id: '/(admin)/users/$userId',
+  id: '/users/$userId',
   path: '/users/$userId',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => adminRouteRoute,
 } as any)
 const adminUsersUserIdIndexRoute = adminUsersUserIdIndexRouteImport.update({
   id: '/',
@@ -105,7 +122,7 @@ const adminUsersUserIdEditRoute = adminUsersUserIdEditRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof authenticationRouteRouteWithChildren
+  '/': typeof adminIndexRoute
   '/access-denied': typeof errorsAccessDeniedRoute
   '/maintenance': typeof errorsMaintenanceRoute
   '/not-found': typeof errorsNotFoundRoute
@@ -113,6 +130,7 @@ export interface FileRoutesByFullPath {
   '/contacts/create': typeof adminContactsCreateRoute
   '/users/create': typeof adminUsersCreateRoute
   '/contacts': typeof adminContactsIndexRoute
+  '/dashboard': typeof adminDashboardIndexRoute
   '/users': typeof adminUsersIndexRoute
   '/forgot-password': typeof authenticationForgotPasswordIndexRoute
   '/reset-password': typeof authenticationResetPasswordIndexRoute
@@ -122,13 +140,14 @@ export interface FileRoutesByFullPath {
   '/users/$userId/': typeof adminUsersUserIdIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof authenticationRouteRouteWithChildren
+  '/': typeof adminIndexRoute
   '/access-denied': typeof errorsAccessDeniedRoute
   '/maintenance': typeof errorsMaintenanceRoute
   '/not-found': typeof errorsNotFoundRoute
   '/contacts/create': typeof adminContactsCreateRoute
   '/users/create': typeof adminUsersCreateRoute
   '/contacts': typeof adminContactsIndexRoute
+  '/dashboard': typeof adminDashboardIndexRoute
   '/users': typeof adminUsersIndexRoute
   '/forgot-password': typeof authenticationForgotPasswordIndexRoute
   '/reset-password': typeof authenticationResetPasswordIndexRoute
@@ -139,14 +158,17 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/(admin)': typeof adminRouteRouteWithChildren
   '/(authentication)': typeof authenticationRouteRouteWithChildren
   '/(errors)/access-denied': typeof errorsAccessDeniedRoute
   '/(errors)/maintenance': typeof errorsMaintenanceRoute
   '/(errors)/not-found': typeof errorsNotFoundRoute
+  '/(admin)/': typeof adminIndexRoute
   '/(admin)/users/$userId': typeof adminUsersUserIdRouteRouteWithChildren
   '/(admin)/contacts/create': typeof adminContactsCreateRoute
   '/(admin)/users/create': typeof adminUsersCreateRoute
   '/(admin)/contacts/': typeof adminContactsIndexRoute
+  '/(admin)/dashboard/': typeof adminDashboardIndexRoute
   '/(admin)/users/': typeof adminUsersIndexRoute
   '/(authentication)/forgot-password/': typeof authenticationForgotPasswordIndexRoute
   '/(authentication)/reset-password/': typeof authenticationResetPasswordIndexRoute
@@ -166,6 +188,7 @@ export interface FileRouteTypes {
     | '/contacts/create'
     | '/users/create'
     | '/contacts'
+    | '/dashboard'
     | '/users'
     | '/forgot-password'
     | '/reset-password'
@@ -182,6 +205,7 @@ export interface FileRouteTypes {
     | '/contacts/create'
     | '/users/create'
     | '/contacts'
+    | '/dashboard'
     | '/users'
     | '/forgot-password'
     | '/reset-password'
@@ -191,14 +215,17 @@ export interface FileRouteTypes {
     | '/users/$userId'
   id:
     | '__root__'
+    | '/(admin)'
     | '/(authentication)'
     | '/(errors)/access-denied'
     | '/(errors)/maintenance'
     | '/(errors)/not-found'
+    | '/(admin)/'
     | '/(admin)/users/$userId'
     | '/(admin)/contacts/create'
     | '/(admin)/users/create'
     | '/(admin)/contacts/'
+    | '/(admin)/dashboard/'
     | '/(admin)/users/'
     | '/(authentication)/forgot-password/'
     | '/(authentication)/reset-password/'
@@ -209,15 +236,11 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  adminRouteRoute: typeof adminRouteRouteWithChildren
   authenticationRouteRoute: typeof authenticationRouteRouteWithChildren
   errorsAccessDeniedRoute: typeof errorsAccessDeniedRoute
   errorsMaintenanceRoute: typeof errorsMaintenanceRoute
   errorsNotFoundRoute: typeof errorsNotFoundRoute
-  adminUsersUserIdRouteRoute: typeof adminUsersUserIdRouteRouteWithChildren
-  adminContactsCreateRoute: typeof adminContactsCreateRoute
-  adminUsersCreateRoute: typeof adminUsersCreateRoute
-  adminContactsIndexRoute: typeof adminContactsIndexRoute
-  adminUsersIndexRoute: typeof adminUsersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -228,6 +251,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof authenticationRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/(admin)': {
+      id: '/(admin)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof adminRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(admin)/': {
+      id: '/(admin)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof adminIndexRouteImport
+      parentRoute: typeof adminRouteRoute
     }
     '/(errors)/not-found': {
       id: '/(errors)/not-found'
@@ -283,35 +320,42 @@ declare module '@tanstack/react-router' {
       path: '/users'
       fullPath: '/users'
       preLoaderRoute: typeof adminUsersIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof adminRouteRoute
+    }
+    '/(admin)/dashboard/': {
+      id: '/(admin)/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof adminDashboardIndexRouteImport
+      parentRoute: typeof adminRouteRoute
     }
     '/(admin)/contacts/': {
       id: '/(admin)/contacts/'
       path: '/contacts'
       fullPath: '/contacts'
       preLoaderRoute: typeof adminContactsIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof adminRouteRoute
     }
     '/(admin)/users/create': {
       id: '/(admin)/users/create'
       path: '/users/create'
       fullPath: '/users/create'
       preLoaderRoute: typeof adminUsersCreateRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof adminRouteRoute
     }
     '/(admin)/contacts/create': {
       id: '/(admin)/contacts/create'
       path: '/contacts/create'
       fullPath: '/contacts/create'
       preLoaderRoute: typeof adminContactsCreateRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof adminRouteRoute
     }
     '/(admin)/users/$userId': {
       id: '/(admin)/users/$userId'
       path: '/users/$userId'
       fullPath: '/users/$userId'
       preLoaderRoute: typeof adminUsersUserIdRouteRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof adminRouteRoute
     }
     '/(admin)/users/$userId/': {
       id: '/(admin)/users/$userId/'
@@ -329,6 +373,45 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface adminUsersUserIdRouteRouteChildren {
+  adminUsersUserIdEditRoute: typeof adminUsersUserIdEditRoute
+  adminUsersUserIdIndexRoute: typeof adminUsersUserIdIndexRoute
+}
+
+const adminUsersUserIdRouteRouteChildren: adminUsersUserIdRouteRouteChildren = {
+  adminUsersUserIdEditRoute: adminUsersUserIdEditRoute,
+  adminUsersUserIdIndexRoute: adminUsersUserIdIndexRoute,
+}
+
+const adminUsersUserIdRouteRouteWithChildren =
+  adminUsersUserIdRouteRoute._addFileChildren(
+    adminUsersUserIdRouteRouteChildren,
+  )
+
+interface adminRouteRouteChildren {
+  adminIndexRoute: typeof adminIndexRoute
+  adminUsersUserIdRouteRoute: typeof adminUsersUserIdRouteRouteWithChildren
+  adminContactsCreateRoute: typeof adminContactsCreateRoute
+  adminUsersCreateRoute: typeof adminUsersCreateRoute
+  adminContactsIndexRoute: typeof adminContactsIndexRoute
+  adminDashboardIndexRoute: typeof adminDashboardIndexRoute
+  adminUsersIndexRoute: typeof adminUsersIndexRoute
+}
+
+const adminRouteRouteChildren: adminRouteRouteChildren = {
+  adminIndexRoute: adminIndexRoute,
+  adminUsersUserIdRouteRoute: adminUsersUserIdRouteRouteWithChildren,
+  adminContactsCreateRoute: adminContactsCreateRoute,
+  adminUsersCreateRoute: adminUsersCreateRoute,
+  adminContactsIndexRoute: adminContactsIndexRoute,
+  adminDashboardIndexRoute: adminDashboardIndexRoute,
+  adminUsersIndexRoute: adminUsersIndexRoute,
+}
+
+const adminRouteRouteWithChildren = adminRouteRoute._addFileChildren(
+  adminRouteRouteChildren,
+)
 
 interface authenticationRouteRouteChildren {
   authenticationForgotPasswordIndexRoute: typeof authenticationForgotPasswordIndexRoute
@@ -348,31 +431,12 @@ const authenticationRouteRouteChildren: authenticationRouteRouteChildren = {
 const authenticationRouteRouteWithChildren =
   authenticationRouteRoute._addFileChildren(authenticationRouteRouteChildren)
 
-interface adminUsersUserIdRouteRouteChildren {
-  adminUsersUserIdEditRoute: typeof adminUsersUserIdEditRoute
-  adminUsersUserIdIndexRoute: typeof adminUsersUserIdIndexRoute
-}
-
-const adminUsersUserIdRouteRouteChildren: adminUsersUserIdRouteRouteChildren = {
-  adminUsersUserIdEditRoute: adminUsersUserIdEditRoute,
-  adminUsersUserIdIndexRoute: adminUsersUserIdIndexRoute,
-}
-
-const adminUsersUserIdRouteRouteWithChildren =
-  adminUsersUserIdRouteRoute._addFileChildren(
-    adminUsersUserIdRouteRouteChildren,
-  )
-
 const rootRouteChildren: RootRouteChildren = {
+  adminRouteRoute: adminRouteRouteWithChildren,
   authenticationRouteRoute: authenticationRouteRouteWithChildren,
   errorsAccessDeniedRoute: errorsAccessDeniedRoute,
   errorsMaintenanceRoute: errorsMaintenanceRoute,
   errorsNotFoundRoute: errorsNotFoundRoute,
-  adminUsersUserIdRouteRoute: adminUsersUserIdRouteRouteWithChildren,
-  adminContactsCreateRoute: adminContactsCreateRoute,
-  adminUsersCreateRoute: adminUsersCreateRoute,
-  adminContactsIndexRoute: adminContactsIndexRoute,
-  adminUsersIndexRoute: adminUsersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
