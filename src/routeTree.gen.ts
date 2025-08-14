@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './features/__root'
 import { Route as authenticationRouteRouteImport } from './features/(authentication)/route'
 import { Route as adminRouteRouteImport } from './features/(admin)/route'
 import { Route as adminIndexRouteImport } from './features/(admin)/index'
+import { Route as errorsUnderConstructionRouteImport } from './features/(errors)/under-construction'
 import { Route as errorsNotFoundRouteImport } from './features/(errors)/not-found'
 import { Route as errorsMaintenanceRouteImport } from './features/(errors)/maintenance'
 import { Route as errorsAccessDeniedRouteImport } from './features/(errors)/access-denied'
@@ -40,6 +41,11 @@ const adminIndexRoute = adminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => adminRouteRoute,
+} as any)
+const errorsUnderConstructionRoute = errorsUnderConstructionRouteImport.update({
+  id: '/(errors)/under-construction',
+  path: '/under-construction',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const errorsNotFoundRoute = errorsNotFoundRouteImport.update({
   id: '/(errors)/not-found',
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/access-denied': typeof errorsAccessDeniedRoute
   '/maintenance': typeof errorsMaintenanceRoute
   '/not-found': typeof errorsNotFoundRoute
+  '/under-construction': typeof errorsUnderConstructionRoute
   '/users/$userId': typeof adminUsersUserIdRouteRouteWithChildren
   '/contacts/create': typeof adminContactsCreateRoute
   '/users/create': typeof adminUsersCreateRoute
@@ -144,6 +151,7 @@ export interface FileRoutesByTo {
   '/access-denied': typeof errorsAccessDeniedRoute
   '/maintenance': typeof errorsMaintenanceRoute
   '/not-found': typeof errorsNotFoundRoute
+  '/under-construction': typeof errorsUnderConstructionRoute
   '/contacts/create': typeof adminContactsCreateRoute
   '/users/create': typeof adminUsersCreateRoute
   '/contacts': typeof adminContactsIndexRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/(errors)/access-denied': typeof errorsAccessDeniedRoute
   '/(errors)/maintenance': typeof errorsMaintenanceRoute
   '/(errors)/not-found': typeof errorsNotFoundRoute
+  '/(errors)/under-construction': typeof errorsUnderConstructionRoute
   '/(admin)/': typeof adminIndexRoute
   '/(admin)/users/$userId': typeof adminUsersUserIdRouteRouteWithChildren
   '/(admin)/contacts/create': typeof adminContactsCreateRoute
@@ -184,6 +193,7 @@ export interface FileRouteTypes {
     | '/access-denied'
     | '/maintenance'
     | '/not-found'
+    | '/under-construction'
     | '/users/$userId'
     | '/contacts/create'
     | '/users/create'
@@ -202,6 +212,7 @@ export interface FileRouteTypes {
     | '/access-denied'
     | '/maintenance'
     | '/not-found'
+    | '/under-construction'
     | '/contacts/create'
     | '/users/create'
     | '/contacts'
@@ -220,6 +231,7 @@ export interface FileRouteTypes {
     | '/(errors)/access-denied'
     | '/(errors)/maintenance'
     | '/(errors)/not-found'
+    | '/(errors)/under-construction'
     | '/(admin)/'
     | '/(admin)/users/$userId'
     | '/(admin)/contacts/create'
@@ -241,6 +253,7 @@ export interface RootRouteChildren {
   errorsAccessDeniedRoute: typeof errorsAccessDeniedRoute
   errorsMaintenanceRoute: typeof errorsMaintenanceRoute
   errorsNotFoundRoute: typeof errorsNotFoundRoute
+  errorsUnderConstructionRoute: typeof errorsUnderConstructionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -265,6 +278,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof adminIndexRouteImport
       parentRoute: typeof adminRouteRoute
+    }
+    '/(errors)/under-construction': {
+      id: '/(errors)/under-construction'
+      path: '/under-construction'
+      fullPath: '/under-construction'
+      preLoaderRoute: typeof errorsUnderConstructionRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(errors)/not-found': {
       id: '/(errors)/not-found'
@@ -437,6 +457,7 @@ const rootRouteChildren: RootRouteChildren = {
   errorsAccessDeniedRoute: errorsAccessDeniedRoute,
   errorsMaintenanceRoute: errorsMaintenanceRoute,
   errorsNotFoundRoute: errorsNotFoundRoute,
+  errorsUnderConstructionRoute: errorsUnderConstructionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
