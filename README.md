@@ -22,7 +22,7 @@ cd new_directory_name
 #### Install dependencies.
 
 ```bash
- pnpm install
+pnpm install
 ```
 
 #### Start the server

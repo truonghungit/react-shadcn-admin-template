@@ -13,6 +13,7 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { AppSidebar } from '../components/app-sidebar';
+import { SettingDrawer } from '@/components/setting-drawer';
 
 export default function ClassicLayout({
   children,
@@ -45,6 +46,7 @@ export default function ClassicLayout({
             </Breadcrumb>
           </div>
         </header>
+        <SettingDrawer />
         <div className='flex flex-1 flex-col gap-4 p-4 pt-0'>{children}</div>
       </SidebarInset>
     </SidebarProvider>
